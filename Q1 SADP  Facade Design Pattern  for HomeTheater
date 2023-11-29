@@ -1,0 +1,94 @@
+Write a Java Program to implement Facade Design Pattern  for HomeTheater 
+
+// Subsystem classes
+class Projector {
+    void turnOn() {
+        System.out.println("Projector is ON");
+    }
+
+    void turnOff() {
+        System.out.println("Projector is OFF");
+    }
+}
+
+class Screen {
+    void pullDown() {
+        System.out.println("Screen is pulled down");
+    }
+
+    void pullUp() {
+        System.out.println("Screen is pulled up");
+    }
+}
+
+class Lights {
+    void dim() {
+        System.out.println("Lights are dimmed");
+    }
+
+    void brighten() {
+        System.out.println("Lights are brightened");
+    }
+}
+
+class SoundSystem {
+    void turnOn() {
+        System.out.println("Sound System is ON");
+    }
+
+    void turnOff() {
+        System.out.println("Sound System is OFF");
+    }
+}
+
+// Facade class
+class HomeTheaterFacade {
+    private Projector projector;
+    private Screen screen;
+    private Lights lights;
+    private SoundSystem soundSystem;
+
+    public HomeTheaterFacade(Projector projector, Screen screen, Lights lights, SoundSystem soundSystem) {
+        this.projector = projector;
+        this.screen = screen;
+        this.lights = lights;
+        this.soundSystem = soundSystem;
+    }
+
+    // Methods that simplify the complex interactions
+    public void watchMovie() {
+        System.out.println("Get ready to watch a movie!");
+        projector.turnOn();
+        screen.pullDown();
+        lights.dim();
+        soundSystem.turnOn();
+    }
+
+    public void endMovie() {
+        System.out.println("Movie night is over!");
+        projector.turnOff();
+        screen.pullUp();
+        lights.brighten();
+        soundSystem.turnOff();
+    }
+}
+
+// Client code
+public class FacadePatternExample {
+    public static void main(String[] args) {
+        // Create subsystem components
+        Projector projector = new Projector();
+        Screen screen = new Screen();
+        Lights lights = new Lights();
+        SoundSystem soundSystem = new SoundSystem();
+
+        // Create a facade with these components
+        HomeTheaterFacade homeTheater = new HomeTheaterFacade(projector, screen, lights, soundSystem);
+
+        // Watch a movie using the facade
+        homeTheater.watchMovie();
+
+        // End the movie using the facade
+        homeTheater.endMovie();
+    }
+}
