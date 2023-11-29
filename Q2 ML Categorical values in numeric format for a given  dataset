@@ -3,22 +3,18 @@ Write a python program to make Categorical values in numeric format for a given 
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 
-data = {'Category': ['A', 'B', 'A', 'C', 'B', 'C']}
+# Sample dataset
+data = {'Category': ['A', 'B', 'A', 'C', 'B', 'C', 'A']}
 df = pd.DataFrame(data)
 
-# Method 1: Label Encoding
+# Initialize LabelEncoder
 label_encoder = LabelEncoder()
-df['Category_LabelEncoded'] = label_encoder.fit_transform(df['Category'])
 
-# Method 2: One-Hot Encoding
-df_onehot = pd.get_dummies(df, columns=['Category'], prefix='Category_OneHot')
+# Fit and transform the 'Category' column
+df['Category'] = label_encoder.fit_transform(df['Category'])
 
-# Display the original and encoded datasets
-print("Original DataFrame:")
+# Display the transformed dataset
 print(df)
-
-print("\nLabel Encoded DataFrame:")
-print(df[['Category', 'Category_LabelEncoded']])
 
 print("\nOne-Hot Encoded DataFrame:")
 print(df_onehot)
